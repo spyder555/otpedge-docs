@@ -1,0 +1,39 @@
+---
+title: Error Handling
+description: 'Standard HTTP response codes and error types.'
+---
+
+OTP Edge uses standard HTTP response codes to indicate the success or failure of an API request.
+
+## HTTP Status Codes
+
+| Code | Type | Description |
+| :--- | :--- | :--- |
+| `200` | Success | The request was successful. |
+| `400` | Bad Request | Missing required fields or invalid phone format. |
+| `401` | Unauthorized | Missing or invalid API Key. |
+| `402` | Payment Required | Subscription is inactive or past due. |
+| `403` | Forbidden | Key found but revoked or lacks permissions. |
+| `429` | Too Many Requests | Rate limit exceeded or quota exhausted. |
+| `500` | Server Error | An unexpected error occurred on our side. |
+
+## Error Object Structure
+
+When an error occurs, the response body will contain a JSON object describing the problem.
+
+```json
+{
+  "error": "Short description of the error",
+  "code": "ERROR_CODE_STRING",
+  "details": "Optional extended debugging information"
+}
+```
+
+### Common Error Codes
+
+| Code | Description |
+| :--- | :--- |
+| `INVALID_PHONE_NUMBER` | The `phone_number` provided is not a valid E.164 string. |
+| `QUOTA_EXCEEDED` | You have reached your monthly limit for the current tier. |
+| `SPAM_COOLDOWN` | You are sending too many messages to the same number too quickly. |
+| `MISSING_TEMPLATE` | The `template_name` provided does not exist in your account. |

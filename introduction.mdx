@@ -1,0 +1,54 @@
+---
+title: Introduction
+description: 'Enterprise-grade WhatsApp OTP infrastructure with stateless identity verification.'
+---
+
+<img
+  className="block dark:hidden"
+  src="/images/hero-light.png"
+  alt="Hero Light"
+/>
+<img
+  className="hidden dark:block"
+  src="/images/hero-dark.png"
+  alt="Hero Dark"
+/>
+
+## Infrastructure for Modern Auth
+
+OTP Edge is a high-performance WhatsApp OTP platform designed for developers who prioritize security, speed, and reliability. We eliminate the complexity of Meta developer accounts and provide a distributed edge network for sub-100ms dispatch latency.
+
+### Key Features
+
+<CardGroup cols={2}>
+  <Card
+    title="Stateless Identity"
+    icon="shield-check"
+  >
+    Receive cryptographically signed JWTs upon verification. Secure, stateless, and enterprise-ready.
+  </Card>
+  <Card
+    title="Edge Compute"
+    icon="bolt"
+  >
+    OTPs are dispatched through our global edge network for maximum delivery speed.
+  </Card>
+  <Card
+    title="Zero Meta Setup"
+    icon="whatsapp"
+  >
+    Start sending messages immediately without managing Meta apps or business verification.
+  </Card>
+  <Card
+    title="Managed Security"
+    icon="vault"
+  >
+    Benefit from IP allowlisting, CSPRNG generation, and hashed OTP storage.
+  </Card>
+</CardGroup>
+
+## The OTP Edge Flow
+
+1.  **Dispatch**: Hit our `/v1/send-otp` endpoint with a phone number.
+2.  **Verify**: Your user enters the code; you call `/v1/verify-otp`.
+3.  **Identity**: Receive a signed JWT. Verify it offline on your backend.

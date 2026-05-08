@@ -1,0 +1,85 @@
+---
+title: 'Verifying Identity Tokens'
+description: 'How to securely verify the OTP Edge Identity Token (JWT) on your backend.'
+---
+
+## The "Usher" Analogy
+
+To understand why verification is necessary, think of OTP Edge like a theater:
+
+1.  **The Box Office (`/verify-otp`)**: You give them the OTP code, and they give you a **Ticket** (the Identity Token).
+2.  **The Usher (Your Backend)**: The Box Office is outside. To get to the user's data (the seat), you must show the Ticket to the Usher.
+3.  **The Check**: If the Usher doesn't check the signature on the ticket, anyone could walk in with a fake piece of paper and claim to be a valid user.
+
+**OTP Edge does not return user details in plain text upon success. You must "unlock" the token to see who just logged in.**
+
+---
+
+## Standard Verification Flow
+
+OTP Edge uses the **RS256** algorithm. We provide a **JWKS (JSON Web Key Set)** endpoint that allows your application to fetch and cache our public keys automatically.
+
+### Verification Examples
+
+<CodeGroup>
+
+```javascript Node.js (jose)
+import * as jose from 'jose';
+
+const JWKS_URL = 'https://api.otpedge.com/.well-known/jwks.json';
+
+async function verifyIdentity(token) {
+  try {
+    // 1. Create a remote JWK Set (handles caching and rotation)
+    const JWKS = jose.createRemoteJWKSet(new URL(JWKS_URL));
+
+    // 2. Verify the token signature and expiration
+    const { payload } = await jose.jwtVerify(token, JWKS, {
+      issuer: 'otpedge.com',
+      algorithms: ['RS256']
+    });
+
+    // 3. Token is valid!
+    console.log('Verified User:', payload.phone);
+    return payload;
+  } catch (error) {
+    console.error('Invalid Token:', error.message);
+    throw new Error('Authentication failed');
+  }
+}
+```
+
+```python Python (PyJWT)
+import jwt
+from jwt import PyJWKClient
+
+url = "https://api.otpedge.com/.well-known/jwks.json"
+jwks_client = PyJWKClient(url)
+
+def verify_identity(token):
+    try:
+        # 1. Fetch the signing key from the JWKS endpoint
+        signing_key = jwks_client.get_signing_key_from_jwt(token)
+
+        # 2. Verify the token signature
+        data = jwt.decode(
+            token,
+            signing_key.key,
+            algorithms=["RS256"],
+            issuer="otpedge.com"
+        )
+        
+        print(f"Verified User: {data['phone']}")
+        return data
+    except Exception as e:
+        print(f"Invalid Token: {e}")
+        return None
+```
+
+</CodeGroup>
+
+## Security Checklist
+
+1.  **Backend Only:** Verification must **ONLY** happen on your secure backend server.
+2.  **Verify Issuer:** Ensure the `iss` claim matches `otpedge.com`.
+3.  **Check Expiration:** OTP Edge tokens are short-lived (60 seconds) to prevent replay attacks.

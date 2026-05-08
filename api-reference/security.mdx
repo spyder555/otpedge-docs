@@ -1,0 +1,39 @@
+---
+title: Security Posture
+description: 'How we protect your infrastructure and user data.'
+---
+
+OTP Edge is built with a "Secure by Default" philosophy. We implement multiple layers of cryptographic and structural security to ensure that your authentication flow remains tamper-proof.
+
+## Never Expose Keys
+
+Your Secret Keys (`sk_live_...`) are the master credentials for your workspace.
+
+<Warning>
+  **Secret Keys must NEVER be used in frontend code.** 
+  Exposing a key in a React component, mobile app, or any client-side environment allows malicious actors to exhaust your quota or send unauthorized messages on your behalf. All API requests must be initiated from a secure server environment.
+</Warning>
+
+## Asymmetric Cryptography (RS256)
+
+For enterprise-grade security, OTP Edge uses **Asymmetric Cryptography** to sign identity tokens.
+
+- **Private Key Signing:** We sign our Identity Tokens (JWTs) using a strictly guarded private key stored in our hardware-secured master vault.
+- **Public Key Verification:** You verify these tokens using our **Public Key**. Even if your workspace API Key were to be compromised, an attacker cannot forge identity tokens for your users because they lack the private key.
+
+## Automatic Key Rotation (JWKS)
+
+To maintain long-term security, OTP Edge rotates its signing keys periodically. We provide a standard **JWKS (JSON Web Key Set)** endpoint that allows your application to fetch the current public keys dynamically.
+
+- **Endpoint:** `https://api.otpedge.com/.well-known/jwks.json`
+
+By using standard libraries like `jose` or `jsonwebtoken`, your application can automatically handle key rotation without manual updates.
+
+## Cryptographic OTP Generation
+
+We take the randomness of our verification codes seriously.
+
+<Note>
+  **CSPRNG Enforcement:**
+  OTP Edge utilizes Vercel's Edge hardware entropy pools (via `crypto.randomInt`) to generate Cryptographically Secure Pseudo-Random Numbers (CSPRNG). We never rely on standard `Math.random()` libraries, ensuring your users' OTPs are mathematically immune to deterministic prediction attacks.
+</Note>

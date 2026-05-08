@@ -1,0 +1,40 @@
+---
+title: Rate Limits & Quotas
+description: 'Understanding tiers, quotas, and throughput limits.'
+---
+
+OTP Edge uses a tier-based quota system to ensure infrastructure stability and fair usage across all workspaces.
+
+## Quota Tiers
+
+Your monthly request quota is determined by your subscription tier.
+
+| Tier | Monthly Quota | Features |
+| :--- | :--- | :--- |
+| **Hobby** | 10,000 requests | Edge routing, Basic Logs |
+| **Pro** | 100,000 requests | Priority routing, Advanced Analytics |
+| **Enterprise** | Custom | Dedicated infrastructure, SLA |
+
+## Quota Exhaustion
+
+If your workspace exceeds its monthly quota, the API will return a `429 Too Many Requests` error.
+
+```json
+{
+  "error": "Usage quota exceeded. Please top up or upgrade.",
+  "code": "QUOTA_EXCEEDED"
+}
+```
+
+To resume service, you can either wait for your next billing cycle to reset or upgrade your tier in the **Billing** section of your dashboard.
+
+## Anti-Spam Guardrails
+
+To protect your account from malicious bots and "OTP bombing" attacks, we enforce a strict cooldown per recipient.
+
+- **Recipient Cooldown**: 60 seconds per phone number.
+- **Error Response**: `429 Too Many Requests` with code `SPAM_COOLDOWN`.
+
+<Note>
+  These guardrails are active on all tiers to protect your workspace reputation and budget.
+</Note>

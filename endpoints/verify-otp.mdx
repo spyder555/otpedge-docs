@@ -1,0 +1,39 @@
+---
+title: 'Verify OTP'
+api: 'POST https://api.otpedge.com/v1/verify-otp'
+description: 'Validates the user OTP and returns an Identity Token.'
+---
+
+## Request Body
+
+<ParamField body="phone_number" type="string" required>
+  The recipient's phone number in E.164 format.
+</ParamField>
+
+<ParamField body="code" type="string" required>
+  The 6-digit code entered by the user.
+</ParamField>
+
+### Response Examples
+
+<ResponseExample>
+
+```json 200 OK (Valid)
+{
+  "status": "verified",
+  "identity_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6InZub2RlXzIwMjZfMDUifQ..."
+}
+```
+
+```json 200 OK (Invalid)
+{
+  "status": "error",
+  "reason": "invalid_code"
+}
+```
+
+</ResponseExample>
+
+<Note>
+  **The response does not contain user data.** You must decode the `identity_token` on your backend to retrieve the user's phone number. This ensures the request is authentic and hasn't been tampered with.
+</Note>

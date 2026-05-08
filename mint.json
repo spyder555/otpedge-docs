@@ -1,0 +1,56 @@
+{
+  "name": "OTP Edge",
+  "logo": {
+    "light": "/logo/light.svg",
+    "dark": "/logo/dark.svg"
+  },
+  "favicon": "/favicon.png",
+  "colors": {
+    "primary": "#00DC82",
+    "light": "#34EEA0",
+    "dark": "#00DC82",
+    "anchors": {
+      "from": "#00DC82",
+      "to": "#34EEA0"
+    }
+  },
+  "topbarLinks": [
+    {
+      "name": "Support",
+      "url": "mailto:support@otpedge.com"
+    }
+  ],
+  "topbarCtaButton": {
+    "name": "Dashboard",
+    "url": "https://otpedge.com/dashboard"
+  },
+  "navigation": [
+    {
+      "group": "Getting Started",
+      "pages": [
+        "introduction",
+        "quickstart"
+      ]
+    },
+    {
+      "group": "Core Concepts",
+      "pages": [
+        "api-reference/authentication",
+        "api-reference/rate-limits",
+        "api-reference/security",
+        "api-reference/errors"
+      ]
+    },
+    {
+      "group": "API Endpoints",
+      "pages": [
+        "endpoints/send-otp",
+        "endpoints/verify-otp"
+      ]
+    }
+  ],
+  "footerSocials": {
+    "github": "https://github.com/otpedge",
+    "x": "https://x.com/otpedge"
+  }
+}

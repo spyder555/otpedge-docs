@@ -1,0 +1,31 @@
+---
+title: Authentication
+description: 'Secure your requests using standard HTTP Bearer authentication.'
+---
+
+All requests to the OTP Edge API must include a valid Secret Key in the `Authorization` header. We use standard Bearer Token authentication to ensure every dispatch is authorized and attributed to your workspace.
+
+## Header Format
+
+Include your key in the header as follows:
+
+```http
+Authorization: Bearer sk_live_your_secret_key
+```
+
+## Security Best Practices
+
+### The "Show Once" Model
+OTP Edge implements a hardened security posture for API keys. 
+
+<Warning>
+  **OTP Edge uses a "Show Once" security model.** We store only the SHA-256 hash of your API keys at rest. We cannot recover a lost key for you. If a key is compromised or lost, you must revoke it immediately in the dashboard and generate a new one.
+</Warning>
+
+### Environment Isolation
+We recommend using different keys for development and production environments. 
+- Use **Test Keys** (`sk_test_...`) to simulate OTP dispatches without hitting the Meta Cloud API or consuming your monthly quota.
+- Use **Live Keys** (`sk_live_...`) only in your production backend environment.
+
+### Never Leak Secrets
+Never include your Secret Key in client-side code (Frontend, Mobile Apps). OTP Edge is designed for server-side dispatch to prevent malicious actors from exhausting your quota.
