@@ -38,6 +38,7 @@
         "api-reference/authentication",
         "api-reference/rate-limits",
         "api-reference/security",
+        "api-reference/verifying-tokens",
         "api-reference/errors"
       ]
     },
@@ -48,9 +49,5 @@
         "endpoints/verify-otp"
       ]
     }
-  ],
-  "footerSocials": {
-    "github": "https://github.com/otpedge",
-    "x": "https://x.com/otpedge"
-  }
+  ]
 }
