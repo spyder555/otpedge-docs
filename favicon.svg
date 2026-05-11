@@ -1,12 +1,20 @@
 <svg width="128" height="128" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <!-- Top -->
-  <path d="M64 12L88 36L64 60L40 36L64 12Z" fill="#00DC82" />
-  <!-- Bottom -->
-  <path d="M64 68L88 92L64 116L40 92L64 68Z" fill="#00DC82" />
-  <!-- Left -->
-  <path d="M12 64L36 88L60 64L36 40L12 64Z" fill="#00DC82" />
-  <!-- Right -->
-  <path d="M68 64L92 88L116 64L92 40L68 64Z" fill="#00DC82" />
-  <!-- Center -->
-  <path d="M64 58L70 64L64 70L58 64L64 58Z" fill="#00DC82" />
+  <!-- Top Diamond (2 shades) -->
+  <path d="M64 12L88 36L64 48L40 36L64 12Z" fill="#34D399" />
+  <path d="M64 48L88 36L64 60L40 36L64 48Z" fill="#059669" />
+  
+  <!-- Bottom Diamond (2 shades) -->
+  <path d="M64 116L40 92L64 80L88 92L64 116Z" fill="#34D399" />
+  <path d="M64 80L40 92L64 68L88 92L64 80Z" fill="#059669" />
+  
+  <!-- Left Diamond (2 shades) -->
+  <path d="M12 64L36 40L48 64L36 88L12 64Z" fill="#34D399" />
+  <path d="M48 64L36 40L60 64L36 88L48 64Z" fill="#059669" />
+  
+  <!-- Right Diamond (2 shades) -->
+  <path d="M116 64L92 88L80 64L92 40L116 64Z" fill="#34D399" />
+  <path d="M80 64L92 88L68 64L92 40L80 64Z" fill="#059669" />
+  
+  <!-- Center Diamond (Standalone, not connected) -->
+  <path d="M64 58L70 64L64 70L58 64L64 58Z" fill="#10B981" />
 </svg>
