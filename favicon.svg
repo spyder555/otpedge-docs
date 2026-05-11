@@ -1,3 +1,12 @@
-<svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
-  <path d="M5 16 L12 4 L24 16 L17 28 Z" fill="#00DC82" />
+<svg width="128" height="128" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Top -->
+  <path d="M64 12L88 36L64 60L40 36L64 12Z" fill="#00DC82" />
+  <!-- Bottom -->
+  <path d="M64 68L88 92L64 116L40 92L64 68Z" fill="#00DC82" />
+  <!-- Left -->
+  <path d="M12 64L36 88L60 64L36 40L12 64Z" fill="#00DC82" />
+  <!-- Right -->
+  <path d="M68 64L92 88L116 64L92 40L68 64Z" fill="#00DC82" />
+  <!-- Center -->
+  <path d="M64 58L70 64L64 70L58 64L64 58Z" fill="#00DC82" />
 </svg>

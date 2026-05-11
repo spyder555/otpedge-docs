@@ -1,4 +1,18 @@
-<svg width="200" height="40" viewBox="0 0 200 40" xmlns="http://www.w3.org/2000/svg">
-  <path d="M10 20 L20 5 L35 20 L25 35 Z" fill="#00DC82" />
-  <text x="50" y="28" font-family="Inter, sans-serif" font-size="20" font-weight="800" fill="#000000">OTP EDGE</text>
+<svg width="240" height="60" viewBox="0 0 240 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Geometric Icon -->
+  <g transform="translate(10, 10) scale(0.35)">
+    <!-- Top -->
+    <path d="M64 12L88 36L64 60L40 36L64 12Z" fill="#00DC82" />
+    <!-- Bottom -->
+    <path d="M64 68L88 92L64 116L40 92L64 68Z" fill="#00DC82" />
+    <!-- Left -->
+    <path d="M12 64L36 88L60 64L36 40L12 64Z" fill="#00DC82" />
+    <!-- Right -->
+    <path d="M68 64L92 88L116 64L92 40L68 64Z" fill="#00DC82" />
+    <!-- Center -->
+    <path d="M64 58L70 64L64 70L58 64L64 58Z" fill="#00DC82" />
+  </g>
+  
+  <!-- Text -->
+  <text x="65" y="38" font-family="Inter, sans-serif" font-size="22" font-weight="800" fill="#000000" letter-spacing="-0.02em">OTP EDGE</text>
 </svg>
