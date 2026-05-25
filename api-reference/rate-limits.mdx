@@ -11,8 +11,8 @@ Your monthly request quota is determined by your subscription tier.
 
 | Tier | Monthly Quota | Features |
 | :--- | :--- | :--- |
-| **Hobby** | 10,000 requests | Edge routing, Basic Logs |
-| **Pro** | 100,000 requests | Priority routing, Advanced Analytics |
+| **Hobby** | 10,000 requests | API access, Basic Logs |
+| **Pro** | 100,000 requests | Higher monthly quota, Dashboard logs |
 | **Enterprise** | Custom | Dedicated infrastructure, SLA |
 
 ## Quota Exhaustion
@@ -21,8 +21,7 @@ If your workspace exceeds its monthly quota, the API will return a `429 Too Many
 
 ```json
 {
-  "error": "Usage quota exceeded. Please top up or upgrade.",
-  "code": "QUOTA_EXCEEDED"
+  "error": "Usage quota exceeded. Please top up or upgrade."
 }
 ```
 

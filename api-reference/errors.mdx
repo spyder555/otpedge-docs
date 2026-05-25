@@ -15,6 +15,7 @@ OTP Edge uses standard HTTP response codes to indicate the success or failure of
 | `402` | Payment Required | Subscription is inactive or past due. |
 | `403` | Forbidden | Key found but revoked or lacks permissions. |
 | `429` | Too Many Requests | Rate limit exceeded or quota exhausted. |
+| `502` | Bad Gateway | Upstream Meta API request failed. |
 | `500` | Server Error | An unexpected error occurred on our side. |
 
 ## Error Object Structure
@@ -24,7 +25,7 @@ When an error occurs, the response body will contain a JSON object describing th
 ```json
 {
   "error": "Short description of the error",
-  "code": "ERROR_CODE_STRING",
+  "code": "OPTIONAL_ERROR_CODE",
   "details": "Optional extended debugging information"
 }
 ```
@@ -33,7 +34,4 @@ When an error occurs, the response body will contain a JSON object describing th
 
 | Code | Description |
 | :--- | :--- |
-| `INVALID_PHONE_NUMBER` | The `phone_number` provided is not a valid E.164 string. |
-| `QUOTA_EXCEEDED` | You have reached your monthly limit for the current tier. |
 | `SPAM_COOLDOWN` | You are sending too many messages to the same number too quickly. |
-| `MISSING_TEMPLATE` | The `template_name` provided does not exist in your account. |

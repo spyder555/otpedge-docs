@@ -10,8 +10,9 @@ Welcome to OTP Edge. This guide will walk you through the three essential steps 
 Use your API Key to dispatch a verification code to your user's WhatsApp number.
 
 ```bash
-curl -X POST https://api.otpedge.com/v1/send-otp \
+curl -X POST https://otpedge.com/api/v1/send-otp \
      -H "Authorization: Bearer YOUR_API_KEY" \
+     -H "Content-Type: application/json" \
      -d '{"to": "919876543210", "app": "MySecureApp"}'
 ```
 
@@ -20,8 +21,9 @@ curl -X POST https://api.otpedge.com/v1/send-otp \
 When the user enters the code, send it to our verification endpoint. If successful, you will receive an **Identity Token**.
 
 ```bash
-curl -X POST https://api.otpedge.com/v1/verify-otp \
+curl -X POST https://otpedge.com/api/v1/verify-otp \
      -H "Authorization: Bearer YOUR_API_KEY" \
+     -H "Content-Type: application/json" \
      -d '{"phone_number": "919876543210", "code": "123456"}'
 ```
 
@@ -42,7 +44,7 @@ Think of Step 2 as the **Box Office**. They give you a **Ticket** (the JWT). But
 ```javascript Node.js
 import * as jose from 'jose';
 
-const JWKS = jose.createRemoteJWKSet(new URL('https://api.otpedge.com/.well-known/jwks.json'));
+const JWKS = jose.createRemoteJWKSet(new URL('https://otpedge.com/.well-known/jwks.json'));
 const { payload } = await jose.jwtVerify(token, JWKS);
 
 // Now you can trust the identity!

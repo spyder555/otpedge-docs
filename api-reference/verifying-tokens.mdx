@@ -7,7 +7,7 @@ description: 'How to securely verify the OTP Edge Identity Token (JWT) on your b
 
 To understand why verification is necessary, think of OTP Edge like a theater:
 
-1.  **The Box Office (`/verify-otp`)**: You give them the OTP code, and they give you a **Ticket** (the Identity Token).
+1.  **The Box Office (`/api/v1/verify-otp`)**: You give them the OTP code, and they give you a **Ticket** (the Identity Token).
 2.  **The Usher (Your Backend)**: The Box Office is outside. To get to the user's data (the seat), you must show the Ticket to the Usher.
 3.  **The Check**: If the Usher doesn't check the signature on the ticket, anyone could walk in with a fake piece of paper and claim to be a valid user.
 
@@ -26,7 +26,7 @@ OTP Edge uses the **RS256** algorithm. We provide a **JWKS (JSON Web Key Set)** 
 ```javascript Node.js (jose)
 import * as jose from 'jose';
 
-const JWKS_URL = 'https://api.otpedge.com/.well-known/jwks.json';
+const JWKS_URL = 'https://otpedge.com/.well-known/jwks.json';
 
 async function verifyIdentity(token) {
   try {
@@ -53,7 +53,7 @@ async function verifyIdentity(token) {
 import jwt
 from jwt import PyJWKClient
 
-url = "https://api.otpedge.com/.well-known/jwks.json"
+url = "https://otpedge.com/.well-known/jwks.json"
 jwks_client = PyJWKClient(url)
 
 def verify_identity(token):
