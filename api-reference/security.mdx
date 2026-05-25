@@ -18,22 +18,21 @@ Your Secret Keys (`sk_live_...`) are the master credentials for your workspace.
 
 For enterprise-grade security, OTP Edge uses **Asymmetric Cryptography** to sign identity tokens.
 
-- **Private Key Signing:** We sign our Identity Tokens (JWTs) using a strictly guarded private key stored in our hardware-secured master vault.
+- **Private Key Signing:** We sign our Identity Tokens (JWTs) using a private key stored server-side and isolated from browser clients.
 - **Public Key Verification:** You verify these tokens using our **Public Key**. Even if your workspace API Key were to be compromised, an attacker cannot forge identity tokens for your users because they lack the private key.
 
-## Automatic Key Rotation (JWKS)
+## Public Key Discovery (JWKS)
 
-To maintain long-term security, OTP Edge rotates its signing keys periodically. We provide a standard **JWKS (JSON Web Key Set)** endpoint that allows your application to fetch the current public keys dynamically.
+OTP Edge provides a standard **JWKS (JSON Web Key Set)** endpoint that allows your application to fetch the current public keys dynamically.
 
-- **Endpoint:** `https://api.otpedge.com/.well-known/jwks.json`
+- **Endpoint:** `https://otpedge.com/.well-known/jwks.json`
 
-By using standard libraries like `jose` or `jsonwebtoken`, your application can automatically handle key rotation without manual updates.
+By using standard libraries like `jose` or `jsonwebtoken`, your application can cache and refresh public keys without hard-coding them.
 
-## Cryptographic OTP Generation
+## OTP Handling
 
-We take the randomness of our verification codes seriously.
+OTP Edge verifies short-lived OTPs server-side and returns signed identity tokens after successful verification.
 
 <Note>
-  **CSPRNG Enforcement:**
-  OTP Edge utilizes Vercel's Edge hardware entropy pools (via `crypto.randomInt`) to generate Cryptographically Secure Pseudo-Random Numbers (CSPRNG). We never rely on standard `Math.random()` libraries, ensuring your users' OTPs are mathematically immune to deterministic prediction attacks.
+  Keep your OTP Edge secret key on your backend only. Do not call the send or verify endpoints directly from browser or mobile client code.
 </Note>

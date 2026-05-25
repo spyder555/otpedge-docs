@@ -1,6 +1,6 @@
 ---
 title: 'Verify OTP'
-api: 'POST https://api.otpedge.com/v1/verify-otp'
+api: 'POST https://otpedge.com/api/v1/verify-otp'
 description: 'Validates the user OTP and returns an Identity Token.'
 ---
 
@@ -27,8 +27,9 @@ description: 'Validates the user OTP and returns an Identity Token.'
 
 ```json 200 OK (Invalid)
 {
-  "status": "error",
-  "reason": "invalid_code"
+  "success": true,
+  "valid": false,
+  "reason": "invalid"
 }
 ```
 
