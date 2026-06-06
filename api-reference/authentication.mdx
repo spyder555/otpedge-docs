@@ -24,7 +24,7 @@ OTP Edge implements a hardened security posture for API keys.
 
 ### Environment Isolation
 We recommend using different keys for development and production environments. 
-- Use **Test Keys** (`sk_test_...`) to simulate OTP dispatches without hitting the Meta Cloud API or consuming your monthly quota.
+- Use **Test Keys** (`sk_test_...`) to simulate OTP dispatches without hitting the Meta Cloud API or consuming your monthly quota. When using a Test Key, the API will return the generated OTP `code` directly in the JSON response so you can test your verification flow programmatically!
 - Use **Live Keys** (`sk_live_...`) only in your production backend environment.
 
 ### Never Leak Secrets
