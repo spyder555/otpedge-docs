@@ -78,8 +78,23 @@ def verify_identity(token):
 
 </CodeGroup>
 
+## Handling Token Expiration
+
+OTP Edge Identity Tokens are intentionally short-lived (valid for exactly 10 minutes from the time the OTP is verified). This narrow window ensures that if a token is intercepted, it cannot be used indefinitely.
+
+If your backend verification fails with a `TokenExpiredError` (or equivalent in your library), the identity token is no longer valid. 
+
+**Recommended Retry Flow:**
+1. **Do NOT accept the token**: Deny access to the protected route.
+2. **Prompt for Re-authentication**: Redirect the user back to your login/verification screen.
+3. **Re-trigger OTP**: The user must request a new OTP code to generate a fresh identity token.
+
+There is no "refresh" mechanism for an Identity Token. Treat it as a one-time, single-use pass that immediately expires 10 minutes after issuance.
+
+---
+
 ## Security Checklist
 
 1.  **Backend Only:** Verification must **ONLY** happen on your secure backend server.
 2.  **Verify Issuer:** Ensure the `iss` claim matches `otpedge.com`.
-3.  **Check Expiration:** OTP Edge tokens are short-lived (10 minutes) to prevent replay attacks.
+3.  **Check Expiration:** Verify the `exp` claim to ensure the token has not expired. Most JWT libraries (like `jose` or `PyJWT`) handle this automatically during verification.
