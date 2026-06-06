@@ -25,11 +25,9 @@ description: 'Validates the user OTP and returns an Identity Token.'
 }
 ```
 
-```json 200 OK (Invalid)
+```json 401 Unauthorized (Invalid)
 {
-  "success": true,
-  "valid": false,
-  "reason": "invalid"
+  "error": "Invalid or expired OTP"
 }
 ```
 

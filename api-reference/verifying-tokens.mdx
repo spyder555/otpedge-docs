@@ -7,7 +7,7 @@ description: 'How to securely verify the OTP Edge Identity Token (JWT) on your b
 
 To understand why verification is necessary, think of OTP Edge like a theater:
 
-1.  **The Box Office (`/api/v1/verify-otp`)**: You give them the OTP code, and they give you a **Ticket** (the Identity Token).
+1.  **The Box Office (`/verify-otp`)**: You give them the OTP code, and they give you a **Ticket** (the Identity Token).
 2.  **The Usher (Your Backend)**: The Box Office is outside. To get to the user's data (the seat), you must show the Ticket to the Usher.
 3.  **The Check**: If the Usher doesn't check the signature on the ticket, anyone could walk in with a fake piece of paper and claim to be a valid user.
 
@@ -82,4 +82,4 @@ def verify_identity(token):
 
 1.  **Backend Only:** Verification must **ONLY** happen on your secure backend server.
 2.  **Verify Issuer:** Ensure the `iss` claim matches `otpedge.com`.
-3.  **Check Expiration:** OTP Edge tokens are short-lived (60 seconds) to prevent replay attacks.
+3.  **Check Expiration:** OTP Edge tokens are short-lived (10 minutes) to prevent replay attacks.
