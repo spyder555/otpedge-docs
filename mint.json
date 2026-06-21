@@ -46,6 +46,7 @@
       "group": "API Endpoints",
       "pages": [
         "endpoints/send-otp",
+        "endpoints/send-message",
         "endpoints/verify-otp"
       ]
     }
