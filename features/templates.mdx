@@ -1,0 +1,41 @@
+---
+title: Rich Media Templates
+description: 'Engage your audience with stunning visual templates containing images, videos, and interactive buttons.'
+---
+
+<img
+  className="block rounded-lg shadow-xl"
+  src="/images/media_templates.jpg"
+  alt="Rich Media Templates Dashboard"
+/>
+
+## Overview
+
+Text-only OTPs are great for authentication, but marketing requires engagement. OTP Edge's Template Manager allows you to sync, preview, and organize rich media templates directly from your Meta WhatsApp Business Account.
+
+## Supported Media Types
+
+When creating or syncing templates, OTP Edge fully supports the following header types:
+
+- **Image**: Send promotional banners, product images, or QR codes.
+- **Video**: Send short video clips to showcase features or tutorials.
+- **Document**: Send PDF invoices, event tickets, or whitepapers.
+
+## Dynamic Variables
+
+Templates often require personalization. OTP Edge supports dynamic variables in the `body` of your message. 
+
+For example, a template body might look like:
+`Hi {{1}}, your order {{2}} has shipped!`
+
+When dispatching via a Marketing Campaign, you can visually map your audience CSV columns (e.g., `First Name`, `Order ID`) to these variables.
+
+When dispatching programmatically via the `/v1/send-message` API, you provide the variables in the request payload:
+```json
+{
+  "to": "+1234567890",
+  "template": "shipping_alert",
+  "language": "en_US",
+  "variables": ["John", "ORD-9921"]
+}
+```

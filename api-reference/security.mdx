@@ -37,3 +37,16 @@ We take the randomness of our verification codes seriously.
   **CSPRNG Enforcement:**
   OTP Edge utilizes Vercel's Edge hardware entropy pools (via `crypto.randomInt`) to generate Cryptographically Secure Pseudo-Random Numbers (CSPRNG). We never rely on standard `Math.random()` libraries, ensuring your users' OTPs are mathematically immune to deterministic prediction attacks.
 </Note>
+
+## Advanced Infrastructure Security
+
+In addition to cryptography, our API layer implements several protective measures:
+
+### IP Allowlisting
+Restrict API access strictly to your backend servers. By defining an IP Allowlist in your dashboard, OTP Edge will instantly reject any request originating from an unknown IP address, neutralizing the threat of stolen API keys.
+
+### Atomic Database Locking
+To prevent race-condition exploits (where malicious actors send thousands of concurrent requests to bypass API quotas), our billing engine utilizes PostgreSQL row-level locking (`FOR UPDATE`). Check-and-deduct operations are mathematically atomic.
+
+### Volumetric Rate Limiting
+All public endpoints are guarded by strict, per-workspace rate limiters (e.g., 60 requests/minute for OTP dispatches). This prevents brute-force attacks and shields your Meta API quotas from being drained by malicious bots. Note: Bulk Marketing Campaigns initiated via the dashboard deliberately bypass these limits, ensuring your marketing scales without restriction.

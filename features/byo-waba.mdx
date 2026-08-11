@@ -1,0 +1,30 @@
+---
+title: Bring Your Own WABA
+description: 'Connect your existing Meta WhatsApp Business Account for direct pricing and complete control.'
+---
+
+<img
+  className="block rounded-lg shadow-xl"
+  src="/images/waba_integration.jpg"
+  alt="WABA Integration Dashboard"
+/>
+
+## Overview
+
+Traditional CPaaS providers (like Twilio or MessageBird) charge a markup on every WhatsApp message you send. 
+
+OTP Edge flips this model: **You pay us a flat-rate monthly SaaS subscription, and you pay Meta directly for your message usage.** There are zero markups per message from our side.
+
+To facilitate this, OTP Edge supports a "Bring Your Own WABA" (WhatsApp Business Account) architecture.
+
+## How to Connect
+
+Connecting your Meta account is instant. Navigate to the **Integrations** tab in your OTP Edge dashboard and provide the following three credentials:
+
+1. **Phone Number ID**: The unique ID of the phone number registered in your WhatsApp Manager.
+2. **WhatsApp Business Account ID**: The ID of your overarching WABA.
+3. **Permanent Access Token**: A system user token generated in the Meta Developer Portal with `whatsapp_business_messaging` and `whatsapp_business_management` permissions.
+
+## Security
+
+Your Access Token is highly sensitive. When you save your Meta credentials in OTP Edge, the token is encrypted using AES-256-GCM before being stored in our database. It is only decrypted in memory at the exact moment a message needs to be dispatched to Meta's API.

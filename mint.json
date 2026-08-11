@@ -33,6 +33,14 @@
       ]
     },
     {
+      "group": "Dashboard & Features",
+      "pages": [
+        "features/marketing-campaigns",
+        "features/templates",
+        "features/byo-waba"
+      ]
+    },
+    {
       "group": "Core Concepts",
       "pages": [
         "api-reference/authentication",
