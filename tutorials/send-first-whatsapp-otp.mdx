@@ -15,18 +15,20 @@ Before you start, ensure you have the following:
 
 ## Step 1: The Request
 
-To send a WhatsApp OTP, you simply need to make an HTTP `POST` request to the `/api/v1/send` endpoint.
+To send a WhatsApp OTP, you simply need to make an HTTP `POST` request to the `/api/v1/send-otp` endpoint.
 
 Here is an example using `cURL`:
 
 ```bash
 curl --request POST \
-  --url https://api.otpedge.com/v1/send \
+  --url https://www.otpedge.com/api/v1/send-otp \
   --header 'Authorization: Bearer YOUR_API_KEY' \
   --header 'Content-Type: application/json' \
   --data '{
-  "phone": "+1234567890",
-  "channel": "whatsapp"
+  "to": "911234567891",
+  "app": "app_name",
+  "environment": "live",
+  "template": "otp_veri"
 }'
 ```
 
@@ -34,9 +36,10 @@ curl --request POST \
 
 | Parameter | Type | Required | Description |
 | :--- | :--- | :--- | :--- |
-| `phone` | `string` | Yes | The recipient's phone number in E.164 format (e.g. `+1234567890`). |
-| `channel` | `string` | Yes | The delivery channel. Set this to `"whatsapp"`. |
-| `length` | `integer` | No | The length of the OTP (4-8 digits). Default is 6. |
+| `to` | `string` | Yes | The recipient's phone number. |
+| `app` | `string` | Yes | The name of your application. |
+| `environment` | `string` | Yes | The environment (e.g. `live`). |
+| `template` | `string` | Yes | The template ID to use (e.g. `otp_veri`). |
 
 ## Step 2: The Response
 
@@ -60,7 +63,7 @@ Make a `POST` request to the `/api/v1/verify` endpoint:
 
 ```bash
 curl --request POST \
-  --url https://api.otpedge.com/v1/verify \
+  --url https://www.otpedge.com/api/v1/verify-otp \
   --header 'Authorization: Bearer YOUR_API_KEY' \
   --header 'Content-Type: application/json' \
   --data '{
