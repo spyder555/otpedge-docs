@@ -38,7 +38,27 @@
         "tutorials/send-first-whatsapp-otp",
         "tutorials/bulk-whatsapp-marketing",
         "tutorials/connect-your-waba",
-        "tutorials/handling-delivery-webhooks"
+        "tutorials/handling-delivery-webhooks",
+        "tutorials/whatsapp-business-app-vs-api",
+        "tutorials/import-and-manage-contacts",
+        "tutorials/whatsapp-quality-rating",
+        "tutorials/prevent-spam",
+        "tutorials/carousel-templates",
+        "tutorials/apply-for-blue-tick",
+        "tutorials/template-approval-guidelines",
+        "tutorials/dynamic-parameters",
+        "tutorials/click-to-chat-link",
+        "tutorials/click-to-whatsapp-ads",
+        "tutorials/chat-profile",
+        "tutorials/whatsapp-payments",
+        "tutorials/automate-birthday-wishes",
+        "tutorials/qr-code-campaign",
+        "tutorials/api-pricing",
+        "tutorials/setup-api-campaigns",
+        "tutorials/migrate-to-otp-edge",
+        "tutorials/whatsapp-coexistence",
+        "tutorials/audience-filtering",
+        "tutorials/segment-users-with-tags"
       ]
     },
     {
