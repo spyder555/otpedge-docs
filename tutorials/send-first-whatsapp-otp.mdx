@@ -1,0 +1,86 @@
+---
+title: "Send your first WhatsApp OTP"
+description: "A developer guide to integrating the OTP Edge API to send a WhatsApp OTP in under 5 minutes."
+---
+
+Sending OTPs over WhatsApp is significantly faster and more reliable than traditional SMS, and OTP Edge makes it incredibly simple. 
+
+In this tutorial, we will walk through how to send your very first WhatsApp OTP using our REST API.
+
+## Prerequisites
+
+Before you start, ensure you have the following:
+- An **OTP Edge Account**. If you don't have one, [sign up here](https://otpedge.com/signup).
+- Your **API Key**. You can generate one in the [Dashboard](https://otpedge.com/dashboard/api-keys).
+
+## Step 1: The Request
+
+To send a WhatsApp OTP, you simply need to make an HTTP `POST` request to the `/api/v1/send` endpoint.
+
+Here is an example using `cURL`:
+
+```bash
+curl --request POST \
+  --url https://api.otpedge.com/v1/send \
+  --header 'Authorization: Bearer YOUR_API_KEY' \
+  --header 'Content-Type: application/json' \
+  --data '{
+  "phone": "+1234567890",
+  "channel": "whatsapp"
+}'
+```
+
+### Parameters
+
+| Parameter | Type | Required | Description |
+| :--- | :--- | :--- | :--- |
+| `phone` | `string` | Yes | The recipient's phone number in E.164 format (e.g. `+1234567890`). |
+| `channel` | `string` | Yes | The delivery channel. Set this to `"whatsapp"`. |
+| `length` | `integer` | No | The length of the OTP (4-8 digits). Default is 6. |
+
+## Step 2: The Response
+
+If the request is successful, OTP Edge will immediately dispatch the WhatsApp message via the Meta API and return a JSON response containing a unique `referenceId`.
+
+```json
+{
+  "success": true,
+  "referenceId": "msg_abc123def456",
+  "message": "OTP sent successfully via WhatsApp."
+}
+```
+
+> **Note:** You must store this `referenceId`. You will need it in the next step to verify the OTP!
+
+## Step 3: Verifying the OTP
+
+Once the user receives the OTP on WhatsApp and types it into your application, you need to verify it. 
+
+Make a `POST` request to the `/api/v1/verify` endpoint:
+
+```bash
+curl --request POST \
+  --url https://api.otpedge.com/v1/verify \
+  --header 'Authorization: Bearer YOUR_API_KEY' \
+  --header 'Content-Type: application/json' \
+  --data '{
+  "referenceId": "msg_abc123def456",
+  "code": "843912"
+}'
+```
+
+If the code matches, you will receive a success response:
+
+```json
+{
+  "success": true,
+  "message": "OTP verified successfully."
+}
+```
+
+## Next Steps
+
+Congratulations! You've successfully integrated WhatsApp OTPs into your application. 
+
+- To learn more about handling errors, read our [Error Handling Guide](/api-reference/errors).
+- To customize the message template, check out the [Templates](/features/templates) documentation.

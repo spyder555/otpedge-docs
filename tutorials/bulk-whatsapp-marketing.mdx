@@ -1,0 +1,64 @@
+---
+title: "Run Bulk WhatsApp Marketing Campaigns"
+description: "A comprehensive guide on how to upload a CSV and launch a bulk WhatsApp marketing campaign using the OTP Edge Dashboard."
+---
+
+While APIs are great for transactional OTPs, marketing campaigns often require bulk sending. OTP Edge makes it incredibly easy to launch massive WhatsApp marketing campaigns directly from your dashboard without writing a single line of code.
+
+This tutorial will show you how to upload a contact list, select a pre-approved template, and blast your campaign.
+
+## Prerequisites
+
+Before starting, make sure:
+1. You have an **OTP Edge Account**.
+2. You have a **WhatsApp Business Account (WABA)** connected.
+3. You have at least one **approved Marketing Template** in your Meta dashboard.
+
+## Step 1: Prepare your Audience List
+
+You need a list of phone numbers to send your message to. Create a CSV (Comma Separated Values) file with at least one column for the phone number.
+
+If your message template includes variables (e.g., `Hello {{1}}, here is your discount!`), you should add columns for those variables as well.
+
+**Example `contacts.csv`:**
+```csv
+phone,name,discount
++1234567890,Alice,20%
++9876543210,Bob,15%
+```
+
+## Step 2: Create a New Campaign
+
+1. Log into your [OTP Edge Dashboard](https://otpedge.com/dashboard).
+2. Navigate to the **Campaigns** tab on the left sidebar.
+3. Click the **Create Campaign** button in the top right corner.
+4. Give your campaign a descriptive name (e.g., "Black Friday Promo 2024").
+
+## Step 3: Upload Contacts & Select Template
+
+In the campaign builder:
+
+1. **Upload Audience:** Click the upload box and select the `contacts.csv` file you created in Step 1. The dashboard will preview the first few rows to ensure the formatting is correct.
+2. **Map Columns:** Tell the dashboard which column contains the phone numbers.
+3. **Select Template:** Choose your pre-approved WhatsApp marketing template from the dropdown menu.
+4. **Map Variables:** If your template has variables (like `{{1}}`), map them to the corresponding columns in your CSV (e.g., map `{{1}}` to the `name` column).
+
+## Step 4: Blast!
+
+Before sending, you can send a **Test Message** to your own number to verify exactly what the message will look like.
+
+Once everything looks perfect, click **Launch Campaign**. 
+
+OTP Edge's high-throughput infrastructure will process the CSV and dispatch the messages to the WhatsApp API. 
+
+## Tracking Campaign Performance
+
+After the campaign is launched, you will be redirected to the **Campaign Analytics** page. 
+
+Here you can track:
+- **Sent:** How many messages left our servers.
+- **Delivered:** How many messages reached the user's phone.
+- **Read:** How many users opened the message (if read receipts are enabled).
+- **Failed:** Any messages that failed (due to invalid numbers or WhatsApp policy violations).
+
+Happy marketing!

@@ -33,6 +33,13 @@
       ]
     },
     {
+      "group": "Tutorials",
+      "pages": [
+        "tutorials/send-first-whatsapp-otp",
+        "tutorials/bulk-whatsapp-marketing"
+      ]
+    },
+    {
       "group": "Dashboard & Features",
       "pages": [
         "features/marketing-campaigns",
