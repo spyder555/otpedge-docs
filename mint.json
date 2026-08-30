@@ -36,7 +36,9 @@
       "group": "Tutorials",
       "pages": [
         "tutorials/send-first-whatsapp-otp",
-        "tutorials/bulk-whatsapp-marketing"
+        "tutorials/bulk-whatsapp-marketing",
+        "tutorials/connect-your-waba",
+        "tutorials/handling-delivery-webhooks"
       ]
     },
     {

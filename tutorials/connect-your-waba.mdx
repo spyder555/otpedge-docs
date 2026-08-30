@@ -1,0 +1,64 @@
+---
+title: "Connect Your Own WhatsApp Business Account (WABA)"
+description: "Learn how to link your own Meta Developer App and WABA to OTP Edge for complete control over your sender identity and billing."
+---
+
+While OTP Edge provides shared sender numbers for testing and quick starts, scaling your application requires you to bring your own **WhatsApp Business Account (WABA)**.
+
+By connecting your own WABA, you gain:
+1. **Your Brand Name and Logo** as the sender.
+2. **The Green Verification Badge** (if approved by Meta).
+3. **Direct Meta Billing** (no markup on Meta's conversation charges).
+
+## Prerequisites
+
+Before starting this tutorial, ensure you have:
+1. A **Meta Business Manager** account.
+2. A **Meta Developer** account.
+3. Access to the **OTP Edge Dashboard**.
+
+## Step 1: Create a Meta App
+
+1. Go to the [Meta for Developers](https://developers.facebook.com/) portal and click **My Apps**.
+2. Click **Create App**.
+3. Select **Other** > **Next** > **Business** > **Next**.
+4. Name your app (e.g., `MyCompany WhatsApp`) and connect it to your Business Portfolio.
+5. Once created, scroll down and add the **WhatsApp** product to your app.
+
+## Step 2: Configure WhatsApp API
+
+Inside your Meta App dashboard, navigate to **WhatsApp > API Setup**. 
+
+You will see a temporary access token and a Phone Number ID. While this works for testing, you need to generate a **System User Permanent Token** for production.
+
+### Generate a Permanent Token
+1. Go to your **Business Settings** > **Users** > **System Users**.
+2. Add a new System User with an `Employee` role.
+3. Click **Add Assets** and assign your new App with `Full Control`.
+4. Click **Generate New Token**, select your app, and check the `whatsapp_business_messaging` and `whatsapp_business_management` permissions.
+5. **Copy this Token immediately.**
+
+## Step 3: Link to OTP Edge
+
+Now, head back to your [OTP Edge Dashboard](https://otpedge.com/dashboard/integration).
+
+1. Go to the **Integrations** tab.
+2. Click **Connect Custom WABA**.
+3. You will be prompted for three values:
+   - **Phone Number ID**: Found in your Meta App > WhatsApp > API Setup.
+   - **WhatsApp Business Account ID (WABA ID)**: Found right below the Phone Number ID.
+   - **Permanent Token**: The token you generated in Step 2.
+
+Click **Save & Verify**. OTP Edge will instantly ping Meta to verify your credentials.
+
+## Step 4: Configure the Webhook
+
+To ensure OTP Edge can track message delivery statuses (Sent, Delivered, Read, Failed), you must point Meta's webhook to our servers.
+
+1. In the OTP Edge Dashboard (under Integrations), copy your unique **Webhook URL** and **Verify Token**.
+2. Go back to your Meta App > **WhatsApp > Configuration**.
+3. Click **Edit** under the Webhook section.
+4. Paste the URL and Verify Token from OTP Edge and click **Verify and Save**.
+5. Finally, click **Manage** on the Webhook fields and subscribe to the `messages` field.
+
+**Congratulations!** Your WABA is completely integrated. All API requests made from OTP Edge will now automatically route through your official brand number!

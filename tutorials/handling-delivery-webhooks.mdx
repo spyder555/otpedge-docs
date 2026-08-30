@@ -1,0 +1,90 @@
+---
+title: "Handling Delivery Webhooks"
+description: "Learn how to listen for real-time delivery status updates (Sent, Delivered, Read, Failed) on your own server."
+---
+
+When you dispatch a WhatsApp message via OTP Edge, the response is instantaneous, but the actual delivery to the user's phone happens asynchronously. 
+
+To track the exact status of your messages (e.g., if the phone is turned off, or if the user reads the message), you need to configure **Webhooks**.
+
+## Step 1: Create an Endpoint on Your Server
+
+Your server needs an endpoint (e.g., `POST /api/webhooks/whatsapp`) that can receive JSON payloads from OTP Edge.
+
+Here is a simple example using Node.js and Express:
+
+```javascript
+const express = require('express');
+const app = express();
+
+app.use(express.json());
+
+app.post('/api/webhooks/whatsapp', (req, res) => {
+  const { referenceId, status, timestamp, error } = req.body;
+
+  console.log(`Message ${referenceId} is now: ${status}`);
+
+  if (status === 'failed') {
+    console.error(`Reason: ${error.message}`);
+  }
+
+  // Always return 200 OK to acknowledge receipt!
+  res.sendStatus(200); 
+});
+
+app.listen(3000, () => console.log('Webhook listener running on port 3000'));
+```
+
+## Step 2: Configure Webhook in OTP Edge Dashboard
+
+1. Log into your [OTP Edge Dashboard](https://otpedge.com/dashboard/integration).
+2. Go to the **Webhooks** settings.
+3. Click **Add Webhook**.
+4. Enter the public URL of the endpoint you created in Step 1 (e.g., `https://api.yourcompany.com/webhooks/whatsapp`).
+5. Select the events you want to listen to (we recommend selecting `message.status`).
+
+## Understanding Status Payloads
+
+When a message changes state, OTP Edge will send a `POST` request to your webhook with the following JSON structure:
+
+### 1. Delivered Status
+This means the message reached the user's device.
+```json
+{
+  "event": "message.status",
+  "referenceId": "msg_abc123def456",
+  "status": "delivered",
+  "timestamp": "2024-05-15T14:32:01Z"
+}
+```
+
+### 2. Read Status
+This means the user opened the WhatsApp chat (only fires if the user has Read Receipts enabled).
+```json
+{
+  "event": "message.status",
+  "referenceId": "msg_abc123def456",
+  "status": "read",
+  "timestamp": "2024-05-15T14:32:15Z"
+}
+```
+
+### 3. Failed Status
+This means the message could not be delivered. This usually happens if the number is not registered on WhatsApp, or if it violates a Meta policy.
+```json
+{
+  "event": "message.status",
+  "referenceId": "msg_abc123def456",
+  "status": "failed",
+  "timestamp": "2024-05-15T14:32:00Z",
+  "error": {
+    "code": 131026,
+    "message": "Message undeliverable because user is not on WhatsApp."
+  }
+}
+```
+
+## Security & Best Practices
+
+- **Always return a `200 OK` status code.** If your server takes too long to respond or returns an error, OTP Edge will aggressively retry sending the webhook, which could overwhelm your server.
+- **Verify Signatures.** In production, you should verify the `X-OTP-Signature` header to ensure the webhook genuinely came from OTP Edge and wasn't spoofed. Check our [Security documentation](/api-reference/security) for details on verifying signatures.
